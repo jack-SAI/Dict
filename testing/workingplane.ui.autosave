@@ -33,7 +33,8 @@
    </property>
    <property name="styleSheet">
     <string notr="true">#frame{
-background-image: url(:/image/122.webp);}
+
+border-image: url(:/image/123.webp);}
 </string>
    </property>
    <property name="frameShape">
@@ -50,6 +51,9 @@ background-image: url(:/image/122.webp);}
       <width>591</width>
       <height>41</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:8px;</string>
     </property>
    </widget>
    <widget class="QPushButton" name="search">
@@ -75,7 +79,7 @@ QPushButton:pressed
     QPushButton:hover{
                      background-color : rgb(31, 164, 255);
 
-border-radius:15px;
+border-radius:5px;
                      color:white;
                      }
 </string>
@@ -92,6 +96,10 @@ border-radius:15px;
       <width>591</width>
       <height>371</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius:20px;
+font: 10pt &quot;楷体&quot;;</string>
     </property>
    </widget>
   </widget>

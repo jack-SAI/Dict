@@ -7,6 +7,7 @@
 #include <QStandardItemModel>
 #include <QSqlQuery>
 #include <QSqlQueryModel>
+#include <QDebug>
 namespace Ui {
 class workingPlane;
 }
@@ -22,16 +23,19 @@ public:
 private slots:
    // void on_pushButton_clicked();
     void on_search_clicked();
+    void mouseDoubleClickEvent();
 
 private:
     Ui::workingPlane *ui;
     void Connection();
     void show_table();
+    int mMaxnorm=0;
     QSqlQueryModel *models;
     QSqlQueryModel *modelss;
     QStringList midData;
     QStringList mnameData;
     QStringList mpriceData;
+
 };
 
 #endif // WORKINGPLANE_H

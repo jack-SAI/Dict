@@ -1,7 +1,6 @@
 ﻿#include "workingplane.h"
 #include "ui_workingplane.h"
 #include<QTextBrowser>
-#include<workingplane.h>
 
 workingPlane::workingPlane(QWidget *parent) :
     QWidget(parent),
@@ -112,6 +111,17 @@ void workingPlane::on_search_clicked()
     models->setQuery(query);   //重新设置model的内容
     show_table();
 
+}
+
+void workingPlane::mouseDoubleClickEvent(){
+    qDebug()<<"D C";
+    if(mMaxnorm){
+        this->showMaximized();
+        mMaxnorm=1;
+    }else{
+        this->showMinimized();
+        mMaxnorm=0;
+    }
 }
 
 

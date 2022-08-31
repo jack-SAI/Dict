@@ -2,17 +2,20 @@
 #include "ui_workingplane.h"
 #include<QTextBrowser>
 #include<workingplane.h>
+#include<QDebug>
 
 workingPlane::workingPlane(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::workingPlane)
 {
     ui->setupUi(this);
+
+
+    this->setWindowTitle("查询");
     models = new QSqlQueryModel(ui->tableView);//QSqlTableModel为读写模型,QSqlQueryModel为用来查询的只读模型
-     modelss = new QSqlQueryModel(ui->tableView);//QSqlTableModel为读写模型,QSqlQueryModel为用来查询的只读模型
+    modelss = new QSqlQueryModel(ui->tableView);//QSqlTableModel为读写模型,QSqlQueryModel为用来查询的只读模型
     Connection();
-    int x;
-    int y;
+
 }
 
 workingPlane::~workingPlane()
@@ -103,6 +106,9 @@ void workingPlane::on_search_clicked()
     QSqlQuery query;
     query.prepare("select * from stardict where sw LIKE :sw order by sw asc");//搜索以:word开头的所有单词，全字匹配是where word = :word
     query.bindValue(":sw",ui->lineEdit->text()+"%");//参考http://www.qtdebug.com/qtbook-db-common/
+
+//    query.prepare("select * from stardict where %input LIKE:%input order by %input asc");
+
     query.exec();
     if(!query.next())
     {
@@ -111,6 +117,19 @@ void workingPlane::on_search_clicked()
     }
     models->setQuery(query);   //重新设置model的内容
     show_table();
+
+}
+
+
+void workingPlane::mouseDoubleClickEvent(QMouseEvent *e){
+
+    if(!maxnorm){
+        this->showMaximized();
+        maxnorm=1;
+    }else{
+        this->showNormal();
+        maxnorm=0;
+    }
 
 }
 

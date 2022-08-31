@@ -124,4 +124,19 @@ void workingPlane::mouseDoubleClickEvent(){
     }
 }
 
+void workingPlane::closeEvent(QCloseEvent *event){
 
+    QMessageBox msgBox;
+    msgBox.setText("提示");
+    msgBox.setInformativeText("确认退出?");
+    msgBox.setStandardButtons(QMessageBox::Ok | QMessageBox::Cancel);
+    msgBox.setDefaultButton(QMessageBox::Ok);
+    int ret = msgBox.exec();
+    if(ret == QMessageBox::Ok){
+        //若用户点击确认，则接收这个事件,当前窗口会关闭
+        exit(0);
+    }else{
+       //若用户点击取消，则忽略这个事件，当前窗口不会关闭
+    event->ignore();
+}
+}

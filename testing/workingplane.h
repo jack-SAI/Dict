@@ -8,6 +8,7 @@
 #include <QSqlQuery>
 #include <QSqlQueryModel>
 #include <QDebug>
+#include<QCloseEvent>
 namespace Ui {
 class workingPlane;
 }
@@ -24,6 +25,7 @@ private slots:
    // void on_pushButton_clicked();
     void on_search_clicked();
     void mouseDoubleClickEvent();
+    void closeEvent(QCloseEvent *);
 
 private:
     Ui::workingPlane *ui;

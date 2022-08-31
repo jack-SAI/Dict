@@ -19,7 +19,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->templogin,&QPushButton::clicked,wk,&QWidget::show);
     connect(this,&MainWindow::acception,wk,&QWidget::show);
     connect(ui->templogin,&QPushButton::clicked,this,&QWidget::hide);
-    connect(this,&MainWindow::acception,this,&QWidget::show);
+    connect(this,&MainWindow::acception,this,&QWidget::hide);
 
 }
 

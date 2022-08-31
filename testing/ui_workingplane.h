@@ -45,15 +45,13 @@ public:
         sizePolicy.setHeightForWidth(frame->sizePolicy().hasHeightForWidth());
         frame->setSizePolicy(sizePolicy);
         frame->setStyleSheet(QLatin1String("#frame{\n"
-"\n"
-"border-image: url(:/image/123.webp);}\n"
+"background-image: url(:/image/122.webp);}\n"
 ""));
         frame->setFrameShape(QFrame::StyledPanel);
         frame->setFrameShadow(QFrame::Raised);
         lineEdit = new QLineEdit(frame);
         lineEdit->setObjectName(QStringLiteral("lineEdit"));
         lineEdit->setGeometry(QRect(80, 80, 591, 41));
-        lineEdit->setStyleSheet(QStringLiteral("border-radius:8px;"));
         search = new QPushButton(frame);
         search->setObjectName(QStringLiteral("search"));
         search->setGeometry(QRect(680, 80, 51, 41));
@@ -68,15 +66,13 @@ public:
 "    QPushButton:hover{\n"
 "                     background-color : rgb(31, 164, 255);\n"
 "\n"
-"border-radius:5px;\n"
+"border-radius:15px;\n"
 "                     color:white;\n"
 "                     }\n"
 ""));
         tableView = new QTableView(frame);
         tableView->setObjectName(QStringLiteral("tableView"));
         tableView->setGeometry(QRect(80, 130, 591, 371));
-        tableView->setStyleSheet(QString::fromUtf8("border-radius:20px;\n"
-"font: 10pt \"\346\245\267\344\275\223\";"));
 
         retranslateUi(workingPlane);
 

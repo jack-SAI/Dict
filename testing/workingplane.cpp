@@ -8,6 +8,7 @@ workingPlane::workingPlane(QWidget *parent) :
     ui(new Ui::workingPlane)
 {
     ui->setupUi(this);
+    this->setWindowTitle("查询");
     models = new QSqlQueryModel(ui->tableView);//QSqlTableModel为读写模型,QSqlQueryModel为用来查询的只读模型
      modelss = new QSqlQueryModel(ui->tableView);//QSqlTableModel为读写模型,QSqlQueryModel为用来查询的只读模型
     Connection();
@@ -33,38 +34,32 @@ void workingPlane::Connection()
         qDebug("open is OK");
     }
 
-
-    QSqlQuery qsq;
-    qsq.exec("select * from stardict limit 10  ");//搜索stardict表的前10项纪录
-
-    QStandardItemModel *model = new QStandardItemModel(10,2);//类QStandardItemModel负责保存数据
-
-    model->setHeaderData(0,Qt::Horizontal,tr("英文"));
-    model->setHeaderData(1,Qt::Horizontal,tr("中文"));
-
-//    QStringList  app;//全局变量
-//       while(qsq.next())
-//       {
-//           QString a = qsq.value(2).toString();
-//           app.append(a);
-//       }
-//     qDebug()<<app;
-
-    while (qsq.next()) {
-        model->insertRow(1);
-
-        model->setData(model->index(1,0),qsq.value("sw").toString());
-        model->setData(model->index(1,1),qsq.value("translation").toString());
-    }
-
-    ui->tableView->setModel(model); //Qt中用model/view模式来显示数据，将tableView与存储数据的model关联后才有显示的内容
-    ui->tableView->horizontalHeader()->setVisible(true);// 显示表头
-    ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
-    ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);//设置选中时为整行选中
-    ui->tableView->setColumnWidth(0,100);                             //设置第一列的宽度
-    ui->tableView->setColumnWidth(1,500);                            //设置第二列的宽度
+    QSqlQueryModel *model = new QSqlQueryModel(ui->tableView);
 
 
+               model->setQuery(QString("select * from stardict limit 10"));
+               //列名
+
+               model->setHeaderData(0, Qt::Horizontal, tr("ID"));
+               model->setHeaderData(1, Qt::Horizontal, tr("状态"));
+
+
+                ui->tableView->setModel(model);//数据放置进去
+                ui->tableView->setColumnWidth(2,100);                             //设置第一列的宽度
+                ui->tableView->setColumnWidth(5,500);                            //设置第二列的宽度
+               ui->tableView->hideColumn(0);                                     //隐藏不必要的列
+               ui->tableView->hideColumn(1);
+               ui->tableView->hideColumn(3);
+               ui->tableView->hideColumn(4);
+               ui->tableView->hideColumn(6);
+               ui->tableView->hideColumn(7);
+               ui->tableView->hideColumn(8);
+               ui->tableView->hideColumn(9);
+               ui->tableView->hideColumn(10);
+               ui->tableView->hideColumn(11);
+               ui->tableView->hideColumn(12);
+               ui->tableView->hideColumn(13);
+               ui->tableView->hideColumn(14);
 
 }
 
@@ -166,7 +161,7 @@ void workingPlane::closeEvent(QCloseEvent *event){
 void workingPlane::on_lineEdit_textChanged(const QString &arg1)
 {
     if(arg1.isEmpty() && arg1.length()<=3){
-        ;
+        return;
     }
     //qDebug()<<"!! ##";
     QStringList prelist;

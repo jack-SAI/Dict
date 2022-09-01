@@ -9,6 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    this->setWindowTitle("登录");
     setWindowFlags(windowFlags()|Qt::WindowMaximizeButtonHint);
     setWindowFlags(windowFlags()|Qt::WindowMinMaxButtonsHint);
     setWindowFlags(windowFlags()|Qt::WindowCloseButtonHint);

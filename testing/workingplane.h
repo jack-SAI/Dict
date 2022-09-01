@@ -9,6 +9,8 @@
 #include <QSqlQueryModel>
 #include <QDebug>
 #include<QCloseEvent>
+#include<QTextBrowser>
+#include<QCompleter>
 namespace Ui {
 class workingPlane;
 }
@@ -22,26 +24,17 @@ public:
     ~workingPlane();
 
 private slots:
-   // void on_pushButton_clicked();
     void on_search_clicked();
     void mouseDoubleClickEvent();
     void closeEvent(QCloseEvent *);
-
-   // void on_lineEdit_textEdited(const QString &arg1);
-
     void on_lineEdit_textChanged(const QString &arg1);
 
 private:
     Ui::workingPlane *ui;
-    void Connection();
-    void show_table();
     int mMaxnorm=0;
     QSqlQueryModel *models;
-    QSqlQueryModel *modelss;
-    QStringList midData;
-    QStringList mnameData;
-    QStringList mpriceData;
-
+    void OperateDB();
+    void show_table();
 };
 
 #endif // WORKINGPLANE_H

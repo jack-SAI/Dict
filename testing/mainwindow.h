@@ -2,6 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <workingplane.h>
+#include <qdebug.h>
+#include <qmessagebox.h>
 
 
 namespace Ui {
@@ -17,8 +20,6 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_pushButton_2_clicked();
-
     void on_pushButton_clicked();
 
 signals:

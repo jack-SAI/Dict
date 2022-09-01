@@ -45,9 +45,9 @@ background-image: url(:/image/122.webp);}
    <widget class="QLineEdit" name="lineEdit">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>80</y>
-      <width>591</width>
+      <x>160</x>
+      <y>50</y>
+      <width>491</width>
       <height>41</height>
      </rect>
     </property>
@@ -55,8 +55,8 @@ background-image: url(:/image/122.webp);}
    <widget class="QPushButton" name="search">
     <property name="geometry">
      <rect>
-      <x>680</x>
-      <y>80</y>
+      <x>660</x>
+      <y>50</y>
       <width>51</width>
       <height>41</height>
      </rect>
@@ -90,8 +90,8 @@ border-radius:15px;
    <widget class="QTableView" name="tableView">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>130</y>
+      <x>130</x>
+      <y>100</y>
       <width>591</width>
       <height>371</height>
      </rect>

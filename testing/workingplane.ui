@@ -83,6 +83,9 @@ border-radius:15px;
     <property name="text">
      <string>查询</string>
     </property>
+    <property name="shortcut">
+     <string>Return</string>
+    </property>
    </widget>
    <widget class="QTableView" name="tableView">
     <property name="geometry">

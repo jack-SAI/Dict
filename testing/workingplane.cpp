@@ -1,6 +1,7 @@
 ﻿#include "workingplane.h"
 #include "ui_workingplane.h"
 #include<QTextBrowser>
+#include<QCompleter>
 
 workingPlane::workingPlane(QWidget *parent) :
     QWidget(parent),
@@ -10,8 +11,9 @@ workingPlane::workingPlane(QWidget *parent) :
     models = new QSqlQueryModel(ui->tableView);//QSqlTableModel为读写模型,QSqlQueryModel为用来查询的只读模型
      modelss = new QSqlQueryModel(ui->tableView);//QSqlTableModel为读写模型,QSqlQueryModel为用来查询的只读模型
     Connection();
-    int x;
-    int y;
+
+
+
 }
 
 workingPlane::~workingPlane()
@@ -40,6 +42,13 @@ void workingPlane::Connection()
     model->setHeaderData(0,Qt::Horizontal,tr("英文"));
     model->setHeaderData(1,Qt::Horizontal,tr("中文"));
 
+//    QStringList  app;//全局变量
+//       while(qsq.next())
+//       {
+//           QString a = qsq.value(2).toString();
+//           app.append(a);
+//       }
+//     qDebug()<<app;
 
     while (qsq.next()) {
         model->insertRow(1);
@@ -139,4 +148,44 @@ void workingPlane::closeEvent(QCloseEvent *event){
        //若用户点击取消，则忽略这个事件，当前窗口不会关闭
     event->ignore();
 }
+}
+
+
+
+//void (const QString &arg1){
+//    qDebug()<<"!! ##";
+//    QStringList prelist;
+//    QSqlQuery qsq;
+//    qsq.exec("select * from stardict limit 10  ");//搜索stardict表的前10项纪录
+//    while(qsq.next()){
+//        prelist.append(qsq.value(2).toString());
+//    }
+//    qDebug()<<prelist;
+//}
+
+void workingPlane::on_lineEdit_textChanged(const QString &arg1)
+{
+    if(arg1.isEmpty() && arg1.length()<=3){
+        ;
+    }
+    //qDebug()<<"!! ##";
+    QStringList prelist;
+    QSqlQuery qsq;
+
+    qsq.prepare("select word from stardict where sw LIKE :sw order by sw asc");//搜索以:word开头的所有单词，全字匹配是where word = :word
+    qsq.bindValue(":sw",arg1+"%");//参考http://www.qtdebug.com/qtbook-db-common/
+    qsq.exec();
+    //qsq.exec("select * from stardict limit 10  ");//搜索stardict表的前10项纪录
+    while(qsq.next()){
+        prelist.append(qsq.value(0).toString());
+    }
+   // qDebug()<<prelist;
+
+
+    QCompleter *pCompleter=new QCompleter(prelist,this);
+
+    //pCompleter->setFilterMode(Qt::MatchContains);    //部分内容匹配
+   pCompleter->setCaseSensitivity(Qt::CaseInsensitive);    //设置为大小写不敏感
+    ui->lineEdit->setCompleter(pCompleter);
+
 }

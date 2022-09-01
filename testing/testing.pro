@@ -28,19 +28,15 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    workingplane.cpp \
-    dbtable.cpp
+    workingplane.cpp
 
 HEADERS += \
         mainwindow.h \
-    workingplane.h \
-    dbheader.h \
-    dbtable.h
+    workingplane.h
 
 FORMS += \
         mainwindow.ui \
-    workingplane.ui \
-    dbtable.ui
+    workingplane.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

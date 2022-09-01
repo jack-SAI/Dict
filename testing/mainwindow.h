@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include "dbtable.h"
+
 
 namespace Ui {
 class MainWindow;
@@ -26,7 +26,7 @@ signals:
 
 private:
     Ui::MainWindow *ui;
-    dbtable *db = nullptr;
+
 };
 
 #endif // MAINWINDOW_H

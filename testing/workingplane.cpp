@@ -8,7 +8,7 @@ workingPlane::workingPlane(QWidget *parent) :
     ui(new Ui::workingPlane)
 {
     ui->setupUi(this);
-    this->setWindowTitle("查询");
+    this->setWindowTitle("简易英汉词典");
     models = new QSqlQueryModel(ui->tableView);//QSqlTableModel为读写模型,QSqlQueryModel为用来查询的只读模型
      modelss = new QSqlQueryModel(ui->tableView);//QSqlTableModel为读写模型,QSqlQueryModel为用来查询的只读模型
     Connection();
@@ -44,9 +44,9 @@ void workingPlane::Connection()
                model->setHeaderData(1, Qt::Horizontal, tr("状态"));
 
 
-                ui->tableView->setModel(model);//数据放置进去
-                ui->tableView->setColumnWidth(2,100);                             //设置第一列的宽度
-                ui->tableView->setColumnWidth(5,500);                            //设置第二列的宽度
+               ui->tableView->setModel(model);//数据放置进去
+               ui->tableView->setColumnWidth(2,100);                             //设置第一列的宽度
+               ui->tableView->setColumnWidth(5,500);                            //设置第二列的宽度
                ui->tableView->hideColumn(0);                                     //隐藏不必要的列
                ui->tableView->hideColumn(1);
                ui->tableView->hideColumn(3);
@@ -76,21 +76,21 @@ void workingPlane::show_table()
     ui->tableView->horizontalHeader()->setVisible(true);
     ui->tableView->setEditTriggers(QAbstractItemView::NoEditTriggers);
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);//设置选中时为整行选中
-    ui->tableView->setColumnWidth(2,100);                             //设置第一列的宽度
-    ui->tableView->setColumnWidth(5,500);                            //设置第二列的宽度
-    ui->tableView->hideColumn(0);                                     //隐藏第一列，即id
-    ui->tableView->hideColumn(1);                                    //隐藏第四列，即例句
-    ui->tableView->hideColumn(3);                                     //隐藏第一列，即id
-    ui->tableView->hideColumn(4);                                    //隐藏第四列，即例句
-    ui->tableView->hideColumn(6);                                     //隐藏第一列，即id
-    ui->tableView->hideColumn(7);                                    //隐藏第四列，即例句
-    ui->tableView->hideColumn(8);                                     //隐藏第一列，即id
-    ui->tableView->hideColumn(9);                                    //隐藏第四列，即例句
-    ui->tableView->hideColumn(10);                                    //隐藏第四列，即例句
-    ui->tableView->hideColumn(11);                                     //隐藏第一列，即id
-    ui->tableView->hideColumn(12);                                    //隐藏第四列，即例句
-    ui->tableView->hideColumn(13);                                     //隐藏第一列，即id
-    ui->tableView->hideColumn(14);                                    //隐藏第四列，即例句
+    ui->tableView->setColumnWidth(2,100);
+    ui->tableView->setColumnWidth(5,500);
+    ui->tableView->hideColumn(0);
+    ui->tableView->hideColumn(1);
+    ui->tableView->hideColumn(3);
+    ui->tableView->hideColumn(4);
+    ui->tableView->hideColumn(6);
+    ui->tableView->hideColumn(7);
+    ui->tableView->hideColumn(8);
+    ui->tableView->hideColumn(9);
+    ui->tableView->hideColumn(10);
+    ui->tableView->hideColumn(11);
+    ui->tableView->hideColumn(12);
+    ui->tableView->hideColumn(13);
+    ui->tableView->hideColumn(14);
 
 }
 
@@ -147,21 +147,14 @@ void workingPlane::closeEvent(QCloseEvent *event){
 
 
 
-//void (const QString &arg1){
-//    qDebug()<<"!! ##";
-//    QStringList prelist;
-//    QSqlQuery qsq;
-//    qsq.exec("select * from stardict limit 10  ");//搜索stardict表的前10项纪录
-//    while(qsq.next()){
-//        prelist.append(qsq.value(2).toString());
-//    }
-//    qDebug()<<prelist;
-//}
+
 
 void workingPlane::on_lineEdit_textChanged(const QString &arg1)
 {
-    if(arg1.isEmpty() && arg1.length()<=3){
+    if(arg1.isEmpty() || arg1.length()<=2){
+
         return;
+
     }
     //qDebug()<<"!! ##";
     QStringList prelist;
@@ -170,11 +163,11 @@ void workingPlane::on_lineEdit_textChanged(const QString &arg1)
     qsq.prepare("select word from stardict where sw LIKE :sw order by sw asc");//搜索以:word开头的所有单词，全字匹配是where word = :word
     qsq.bindValue(":sw",arg1+"%");//参考http://www.qtdebug.com/qtbook-db-common/
     qsq.exec();
-    //qsq.exec("select * from stardict limit 10  ");//搜索stardict表的前10项纪录
+
     while(qsq.next()){
         prelist.append(qsq.value(0).toString());
     }
-   // qDebug()<<prelist;
+
 
 
     QCompleter *pCompleter=new QCompleter(prelist,this);
